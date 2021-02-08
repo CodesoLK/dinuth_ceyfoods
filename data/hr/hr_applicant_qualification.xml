@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<flectra>
+    <data noupdate="1">
+        <!-- mail.activity.type -->
+        <record model="hr.recruitment.degree" id="OL">
+            <field name="name">OL (Ordinary Level)</field>
+            <field name="sequence">1</field>
+        </record>
+        <record model="hr.recruitment.degree" id="AL">
+            <field name="name">AL (Advanced Level)</field>
+            <field name="sequence">2</field>
+        </record>
+        <record model="hr.recruitment.degree" id="Certificate">
+            <field name="name">Certificate Course</field>
+            <field name="sequence">3</field>
+        </record>
+        <record model="hr.recruitment.degree" id="Diploma">
+            <field name="name">Diploma</field>
+            <field name="sequence">4</field>
+        </record>
+        <record model="hr.recruitment.degree" id="Chartered">
+            <field name="name">Chartered</field>
+            <field name="sequence">5</field>
+        </record>
+    </data>
+</flectra>
+
