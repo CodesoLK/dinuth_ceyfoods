@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<flectra>
+    <data noupdate="1">
+        <!-- hr.recruitment.stage -->
+        <record model="hr.recruitment.stage" id="first_interview">
+            <field name="name">First Interview</field>
+        </record>
+        <record model="hr.recruitment.stage" id="second_interview">
+            <field name="name">Second Interview</field>
+        </record>
+        <record model="hr.recruitment.stage" id="selected_candidate">
+            <field name="name">Selected</field>
+        </record>
+        <record model="hr.recruitment.stage" id="not_seected_candidate">
+            <field name="name">Not Selected</field>
+        </record>
+        <record model="hr.recruitment.stage" id="health_check_passed">
+            <field name="name">Health Check Passed</field>
+        </record>
+        <record model="hr.recruitment.stage" id="health_check_failed">
+            <field name="name">Health Check Failed</field>
+        </record>
+    </data>
+</flectra>
+

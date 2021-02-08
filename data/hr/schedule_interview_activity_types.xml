@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<flectra>
+    <data noupdate="1">
+        <!-- mail.activity.type -->
+        <record model="mail.activity.type" id="interview">
+            <field name="name">Interview</field>
+            <field name="icon">fa-calendar-times-o</field>
+        </record>
+    </data>
+</flectra>
+
