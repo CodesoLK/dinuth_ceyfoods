@@ -11,6 +11,9 @@
     <field name="type_id" position="attributes">
      <attribute name="placeholder">Qualification</attribute>
     </field>
+    <field name="type_id" position="after">
+     <field name="applicant_experience"/>
+    </field>
     </field>
 </record>
 

@@ -15,7 +15,8 @@
     # data files always loaded at installation
     'data': [
         # Views
-        'views/hr/applicant_qualification.xml',
+        'views/hr/hr_applicant.xml',
+        'views/hr/hr_department.xml',
 
         # Data
         'data/hr/stages_for_interview_process.xml',

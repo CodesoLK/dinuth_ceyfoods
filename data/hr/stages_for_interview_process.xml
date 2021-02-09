@@ -14,12 +14,6 @@
         <record model="hr.recruitment.stage" id="not_seected_candidate">
             <field name="name">Not Selected</field>
         </record>
-        <record model="hr.recruitment.stage" id="health_check_passed">
-            <field name="name">Health Check Passed</field>
-        </record>
-        <record model="hr.recruitment.stage" id="health_check_failed">
-            <field name="name">Health Check Failed</field>
-        </record>
     </data>
 </flectra>
 

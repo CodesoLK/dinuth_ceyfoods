@@ -1,1 +1,2 @@
-from . import applicant_qualification
+from . import hr_applicant
+from . import hr_department
