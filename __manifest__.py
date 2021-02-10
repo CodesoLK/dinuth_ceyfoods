@@ -21,7 +21,14 @@
         # Data
         'data/hr/stages_for_interview_process.xml',
         'data/hr/schedule_interview_activity_types.xml',
-        'data/hr/hr_applicant_qualification.xml'
+        'data/hr/hr_applicant_qualification.xml',
+
+        # Wizard
+        'wizard/hr/applicant_health_check.xml',
+
+        # Security
+        'security/hr/ir.model.access.csv',
+        'security/hr/security.xml',
     ],
 
     # website

@@ -14,7 +14,7 @@ from flectra import models, fields, api, _
 #     hr_applicant = fields.Many2one('hr.applicant')
 
 #inheriting model
-class DepartmentAttributeModification(models.Model):
-    _inherit = 'hr.department'
-    is_production = fields.Boolean(string="Production")
+# class DepartmentAttributeModification(models.Model):
+#     _inherit = 'hr.department'
+#     is_production = fields.Boolean(string="Production")
 

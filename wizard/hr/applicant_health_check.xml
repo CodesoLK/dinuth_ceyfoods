@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<flectra>
+
+<!-- tree view of the hr.applicant model -->
+<record id="hr_applicant_health_check_report_wizard" model="ir.ui.view">
+    <field name="name">hr.applicant.health.check.wizard</field>
+    <field name="model">hr.applicant.health.check.wizard</field>
+    <field name="arch" type="xml">
+    <form string="Health Check Results">
+        <group>
+            <field name="message" nolabel="1"/>
+        </group>
+        <footer>
+        <button string="Pass" name="applicant_health_check_result_pass" type="object" class="oe_highlight"/>
+        <button string="Fail" name="applicant_health_check_result_fail" type="object" class="oe_highlight"/>
+        </footer>
+    </form>
+    </field>
+</record>
+
+</flectra>

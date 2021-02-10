@@ -9,11 +9,22 @@
     <field name="inherit_id" ref="hr_recruitment.crm_case_form_view_job"/>
     <field name="arch" type="xml">
     <field name="type_id" position="attributes">
-     <attribute name="placeholder">Qualification</attribute>
+    <attribute name="placeholder">Qualification</attribute>
     </field>
     <field name="type_id" position="after">
-     <field name="applicant_experience"/>
+    <field name="applicant_experience"/>
     </field>
+    <field name="department_id" position="after">
+    <field name="is_production"/>
+    <field name="health_check"/>
+    <field name="health_check_report"/>
+    </field>
+    <button name="create_employee_from_applicant" position="attributes">
+    <attribute name="groups">dinuth_ceyfoods.hr_user_group_director</attribute>
+    </button>
+    <button name="create_employee_from_applicant" position="after">
+    <button string="Health Check Report" name="create_health_record" type="object" class="oe_highlight" attrs="{'invisible': [('health_check', '!=', True)]}"/>
+    </button>
     </field>
 </record>
 

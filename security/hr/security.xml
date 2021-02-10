@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<flectra>
+
+<!-- Creating category for user group -->
+<record id="hr_user_category" model="ir.module.category">
+<field name="name">HRM</field>
+<field name="description">Category for HRM</field>
+</record>
+
+<!-- Creating user group -->
+<record id="hr_user_group_director" model="res.groups">
+<field name="name">Director</field>
+<field name="category_id" ref="hr_user_category"/>
+</record>
+
+<record id="hr_user_group_hr" model="res.groups">
+<field name="name">HR</field>
+<field name="category_id" ref="hr_user_category"/>
+</record>
+
+</flectra>
