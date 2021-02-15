@@ -67,14 +67,13 @@ class ApplicantAttributesModification(models.Model):
                     'work_email': applicant.department_id and applicant.department_id.company_id
                             and applicant.department_id.company_id.email or False,
                     'work_phone': applicant.department_id and applicant.department_id.company_id
-                            and applicant.department_id.company_id.phone or False})
-                    # Extra columns start
+                            and applicant.department_id.company_id.phone or False,
                     'type_id' : applicant.type_id.id,
                     'applicant_experience' : applicant.applicant_experience,
                     'is_production' : applicant.is_production,
                     'health_check' : applicant.health_check,
-                    'health_check_report' : applicant.health_check_report,
-                    # Extra columns end
+                    'health_check_report' : applicant.health_check_report})
+
                 applicant.write({'emp_id': employee.id})
                 applicant.job_id.message_post(
                     body=_('New Employee %s Hired') % applicant.partner_name if applicant.partner_name else applicant.name,

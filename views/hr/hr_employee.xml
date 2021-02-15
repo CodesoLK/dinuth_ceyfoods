@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<flectra>
+
+<!-- tree view of the hr.employee model -->
+<record id="hr_employee_inherit" model="ir.ui.view">
+    <field name="name">hr.employee.inherit</field>
+    <field name="model">hr.employee</field>
+    <field name="inherit_id" ref="hr.view_employee_form"/>
+    <field name="arch" type="xml">
+        <field name="job_id" position="after">
+            <field name="type_id"/>
+            <field name="applicant_experience"/>
+            <field name="is_production"/>
+        </field>
+        <field name="marital" position="after">
+            <field name="health_check"/>
+            <field name="health_check_report"/>
+        </field>
+    </field>
+</record>
+
+</flectra>

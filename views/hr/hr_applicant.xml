@@ -21,6 +21,7 @@
     </field>
     <button name="create_employee_from_applicant" position="attributes">
     <attribute name="groups">dinuth_ceyfoods.hr_user_group_director</attribute>
+    <attribute name="string">Create Casual Employee</attribute>
     </button>
     <button name="create_employee_from_applicant" position="after">
     <button string="Health Check Report" name="create_health_record" type="object" class="oe_highlight" attrs="{'invisible': [('health_check', '!=', True)]}"/>
