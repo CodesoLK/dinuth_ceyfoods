@@ -21,6 +21,24 @@ class ApplicantAttributesModification(models.Model):
     is_production = fields.Boolean(string="Production")
     health_check = fields.Boolean(string="Health Check Eligibility")
     health_check_report = fields.Selection([ ('pass', 'Pass'),('fail', 'Fail'),],'Health Check Results')
+    marital = fields.Selection([
+        ('single', 'Single'),
+        ('married', 'Married'),
+        ('cohabitant', 'Legal Cohabitant'),
+        ('widower', 'Widower'),
+        ('divorced', 'Divorced')
+    ], string='Marital Status', default='single')
+    gender = fields.Selection([
+        ('male', 'Male'),
+        ('female', 'Female'),
+        ('other', 'Other')
+    ], default="male")
+    salutation = fields.Selection([
+        ('Mr', 'Mr.'),
+        ('Miss', 'Miss.'),
+        ('Mrs', 'Mrs.'),
+        ('Hon', 'Hon.'),
+    ], default="Mr")
 
     def create_health_record(self):
         ctx = {
@@ -39,6 +57,10 @@ class ApplicantAttributesModification(models.Model):
 
     @api.multi
     def create_employee_from_applicant(self):
+        # Stage change of the applicant to seleceted
+        stageID = self.env['hr.recruitment.stage'].search([('name','=','Selected')])
+        self.stage_id = stageID
+
         """ Create an hr.employee from the hr.applicants """
         employee = False
         for applicant in self:
@@ -68,7 +90,10 @@ class ApplicantAttributesModification(models.Model):
                             and applicant.department_id.company_id.email or False,
                     'work_phone': applicant.department_id and applicant.department_id.company_id
                             and applicant.department_id.company_id.phone or False,
+                    'salutation' : applicant.salutation,
                     'type_id' : applicant.type_id.id,
+                    'marital' : applicant.marital,
+                    'gender'  : applicant.gender,
                     'applicant_experience' : applicant.applicant_experience,
                     'is_production' : applicant.is_production,
                     'health_check' : applicant.health_check,
