@@ -8,16 +8,23 @@
     <field name="model">hr.applicant</field>
     <field name="inherit_id" ref="hr_recruitment.crm_case_form_view_job"/>
     <field name="arch" type="xml">
+	<field name="partner_id" position="before">
+    <field name="salutation"/>
+    </field>
     <field name="type_id" position="attributes">
     <attribute name="placeholder">Qualification</attribute>
     </field>
     <field name="type_id" position="after">
     <field name="applicant_experience"/>
     </field>
+    <field name="partner_mobile" position="after">
+	<field name="gender"/>
+    <field name="marital"/>
+    </field>
     <field name="department_id" position="after">
-    <field name="is_production"/>
+    <!-- <field name="is_production"/> -->
     <field name="health_check"/>
-    <field name="health_check_report"/>
+    <field name="health_check_report" readonly="1"/>
     </field>
     <button name="create_employee_from_applicant" position="attributes">
     <attribute name="groups">dinuth_ceyfoods.hr_user_group_director</attribute>
@@ -26,6 +33,39 @@
     <button name="create_employee_from_applicant" position="after">
     <button string="Health Check Report" name="create_health_record" type="object" class="oe_highlight" attrs="{'invisible': [('health_check', '!=', True)]}"/>
     </button>
+    <button name="create_health_record" position="attributes">
+    <attribute name="groups">dinuth_ceyfoods.hr_user_group_director</attribute>
+    </button>
+    </field>
+</record>
+
+<!-- Search view of the hr.applicant model -->
+<record id="hr_applicant_view_search" model="ir.ui.view">
+    <field name="name">hr.applicant.view.search</field>
+    <field name="model">hr.applicant</field>
+	<field name="inherit_id" ref="hr_recruitment.view_crm_case_jobs_filter"/>
+    <field name="arch" type="xml">
+        <search string="Search Applicants">
+           <!-- <field name="gender" domain="[('gender','ilike',self)]"/> -->
+           <field name="marital" domain="[('marital','ilike',self)]"/>
+           <separator />
+            <filter string ="Male" name = "male" domain = "[('gender', '=', 'male')]"/>
+            <filter string ="FeMale" name = "fe_male" domain = "[('gender', '=', 'female')]"/>
+			<filter string ="Other" name = "other" domain = "[('gender', '=', 'other')]"/>
+			<separator />
+			<filter string ="Married" name = "married" domain = "[('marital', '=', 'married')]"/>
+			<filter string ="Single" name = "single" domain = "[('marital', '=', 'single')]"/>
+			<group expand="0" string="Group By">
+				<separator />
+				<filter string="Salutation" name="salutation" domain="[]"  context="{'group_by':'salutation'}"/>
+                <filter string="Marital" name="marital" domain="[]"  context="{'group_by':'marital'}"/>
+                <filter string="Gender" name="gender" domain="[]" context="{'group_by':'gender'}"/>
+				<filter string="Qualification" name="qualification" domain="[]" context="{'group_by':'type_id'}"/>
+				<filter string="Designation" name="designation" domain="[]" context="{'group_by':'job_id'}"/>
+				<filter string="Department" name="department" domain="[]" context="{'group_by':'department_id'}"/>
+				<filter string="Health Report" name="health_report" domain="[]" context="{'group_by':'health_check_report'}"/>
+			</group>    
+        </search>
     </field>
 </record>
 

@@ -15,3 +15,9 @@ class EmployeeAttributesModification(models.Model):
     is_production = fields.Boolean(string="Production")
     health_check = fields.Boolean(string="Health Check Eligibility")
     health_check_report = fields.Selection([ ('pass', 'Pass'),('fail', 'Fail'),],'Health Check Results')
+    salutation = fields.Selection([
+        ('Mr', 'Mr.'),
+        ('Miss', 'Miss.'),
+        ('Mrs', 'Mrs.'),
+        ('Hon', 'Hon.'),
+    ], default="Mr")

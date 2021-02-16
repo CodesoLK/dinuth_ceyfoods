@@ -17,6 +17,9 @@
             <field name="health_check"/>
             <field name="health_check_report"/>
         </field>
+        <field name="gender" position="before">
+            <field name="salutation"/>
+        </field>
     </field>
 </record>
 
