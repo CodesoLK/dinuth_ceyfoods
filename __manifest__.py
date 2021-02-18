@@ -19,6 +19,7 @@
         'views/hr/hr_department.xml',
         'views/hr/hr_employee.xml',
         'views/hr/hr_contract.xml',
+        'views/hr/hr_holidays.xml',
 
         # Data
         'data/hr/stages_for_interview_process.xml',

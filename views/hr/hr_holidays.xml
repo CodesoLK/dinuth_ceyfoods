@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<flectra>
+
+<!-- tree view of the hr.holidays model -->
+<record id="hr_holidays_inherit" model="ir.ui.view">
+    <field name="name">hr.holidays.inherit</field>
+    <field name="model">hr.holidays</field>
+    <field name="inherit_id" ref="hr_holidays.edit_holiday_new"/>
+    <field name="arch" type="xml">
+    <button name="action_approve" position="attributes">
+    <attribute name="groups">dinuth_ceyfoods.hr_user_group_director</attribute>
+    </button>
+    <button name="action_refuse" position="attributes">
+    <attribute name="groups">dinuth_ceyfoods.hr_user_group_director</attribute>
+    </button>
+    <button name="action_validate" position="attributes">
+    <attribute name="groups">dinuth_ceyfoods.hr_user_group_director</attribute>
+    </button>
+    </field>
+</record>
+
+</flectra>
