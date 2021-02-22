@@ -8,14 +8,20 @@
     <field name="model">hr.employee</field>
     <field name="inherit_id" ref="hr.view_employee_form"/>
     <field name="arch" type="xml">
+        <!-- <div class="oe_button_box" name="button_box">
+            <button name="open_employee_guarentee" type="object" class="oe_stat_button" icon="fa-calendar">
+            <field name="guarentee_count_total" string="Guarentee Count" widget="statinfo"/>
+            </button>
+        </div> -->
         <field name="job_id" position="after">
             <field name="type_id"/>
             <field name="applicant_experience"/>
-            <field name="is_production"/>
+            <!-- <field name="is_production"/> -->
         </field>
         <field name="marital" position="after">
             <field name="health_check"/>
-            <field name="health_check_report"/>
+            <field name="user_group_director" invisible="1"/>
+            <field name="health_check_report" attrs="{'readonly':[('id','>', 0),('user_group_director','=',False)]}"/>
         </field>
         <field name="gender" position="before">
             <field name="salutation"/>

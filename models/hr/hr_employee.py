@@ -21,3 +21,20 @@ class EmployeeAttributesModification(models.Model):
         ('Mrs', 'Mrs.'),
         ('Hon', 'Hon.'),
     ], default="Mr")
+    user_group_director = fields.Boolean(string="check field", compute='get_user_director')
+
+    @api.depends('user_group_director')
+    def get_user_director(self):
+        res_user = self.env['res.users'].search([('id', '=', self._uid)])
+        if res_user.has_group('dinuth_ceyfoods.hr_user_group_director'):
+            self.user_group_director = True
+        else:
+            self.user_group_director = False
+
+    # @api.one
+    # def _compute_employee_guarentee(self):
+    #     """This compute the loan amount and total loans count of an employee.
+    #         """
+    #     self.loan_count = self.env['hr.loan'].search_count([('employee_id', '=', self.id)])
+
+    # loan_count = fields.Integer(string="Loan Count", compute='_compute_employee_guarentee')

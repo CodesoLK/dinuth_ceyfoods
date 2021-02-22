@@ -42,8 +42,8 @@ class ApplicantContractModification(models.Model):
         ('junior_executive', 'Junior Executive'),
         ('category_1', 'Category 1 - Production/Janitorial/Office Asst./Transport Workers'),
         ('category_2', 'Category 2 – Non Executive Office Employees'),
-        ('category_3', 'Category 3 – Security – Shift Based Work'),
-        ('category_4', 'Category 4 – Technicians – 12 Hours'),
+        ('category_3', 'Category 3 – Security'),
+        ('category_4', 'Category 4 – Technicians'),
     ], default="category_1")
     user_group_director = fields.Boolean(string="check field", compute='get_user_director')
 
