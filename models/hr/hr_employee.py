@@ -22,6 +22,24 @@ class EmployeeAttributesModification(models.Model):
         ('Hon', 'Hon.'),
     ], default="Mr")
     user_group_director = fields.Boolean(string="check field", compute='get_user_director')
+    guarentee_count_total = fields.Integer(string="Guarentee Count", compute='_get_guarentee_count_total')
+    
+    employee_category = fields.Selection([
+        ('senior_executive', 'Senior Executive'),
+        ('executive', 'Executive'),
+        ('junior_executive', 'Junior Executive'),
+        ('category_1', 'Category 1 - Production/Janitorial/Office Asst./Transport Workers'),
+        ('category_2', 'Category 2 – Non Executive Office Employees'),
+        ('category_3', 'Category 3 – Security'),
+        ('category_4', 'Category 4 – Technicians'),
+    ], default="category_1" , string="Employee Category")
+    @api.depends('guarentee_count_total')
+    def _get_guarentee_count_total(self):
+        guarentee_one_count = self.env['hr.loan'].search_count([('guarantee_one', '=', self.id), ('state', '=', 'approve'),
+                                                       ('balance_amount', '!=', 0)])
+        guarentee_two_count = self.env['hr.loan'].search_count([('guarantee_two', '=', self.id), ('state', '=', 'approve'),
+                                                       ('balance_amount', '!=', 0)])
+        self.guarentee_count_total = guarentee_one_count+guarentee_two_count
 
     @api.depends('user_group_director')
     def get_user_director(self):
@@ -30,11 +48,16 @@ class EmployeeAttributesModification(models.Model):
             self.user_group_director = True
         else:
             self.user_group_director = False
-
-    # @api.one
-    # def _compute_employee_guarentee(self):
-    #     """This compute the loan amount and total loans count of an employee.
-    #         """
-    #     self.loan_count = self.env['hr.loan'].search_count([('employee_id', '=', self.id)])
-
-    # loan_count = fields.Integer(string="Loan Count", compute='_compute_employee_guarentee')
+        
+    @api.multi
+    def open_employee_guarentee(self):
+        return False
+        # return {
+        #     'name': _('Guarentee'),
+        #     'domain': ['|',('guarantee_one', '=', self.user_id.id),('guarantee_two', '=', self.user_id.id)],
+        #     'view_type': 'form',
+        #     'res_model': 'hr.loan',
+        #     'view_id': False,
+        #     'view_mode': 'tree,form',
+        #     'type': 'ir.actions.act_window',
+        # }

@@ -21,6 +21,7 @@
         'views/hr/hr_contract.xml',
         'views/hr/hr_holidays.xml',
         'views/hr/hr_loan.xml',
+        'views/hr/hr_resignation.xml',
 
         # Data
         'data/hr/stages_for_interview_process.xml',
@@ -29,6 +30,7 @@
 
         # Wizard
         'wizard/hr/applicant_health_check.xml',
+        'wizard/hr/loan_transfer_to_guarantees.xml',
 
         # Security
         'security/hr/ir.model.access.csv',

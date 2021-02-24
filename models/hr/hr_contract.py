@@ -44,7 +44,7 @@ class ApplicantContractModification(models.Model):
         ('category_2', 'Category 2 – Non Executive Office Employees'),
         ('category_3', 'Category 3 – Security'),
         ('category_4', 'Category 4 – Technicians'),
-    ], default="category_1")
+    ], default="category_1", related="employee_id.employee_category")
     user_group_director = fields.Boolean(string="check field", compute='get_user_director')
 
     @api.depends('user_group_director')

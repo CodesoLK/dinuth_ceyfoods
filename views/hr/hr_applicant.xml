@@ -8,34 +8,34 @@
     <field name="model">hr.applicant</field>
     <field name="inherit_id" ref="hr_recruitment.crm_case_form_view_job"/>
     <field name="arch" type="xml">
-	<field name="partner_id" position="before">
-    <field name="salutation"/>
-    </field>
-    <field name="type_id" position="attributes">
-    <attribute name="placeholder">Qualification</attribute>
-    </field>
-    <field name="type_id" position="after">
-    <field name="applicant_experience"/>
-    </field>
-    <field name="partner_mobile" position="after">
-	<field name="gender"/>
-    <field name="marital"/>
-    </field>
-    <field name="department_id" position="after">
-    <!-- <field name="is_production"/> -->
-    <field name="health_check"/>
-    <field name="health_check_report" readonly="1"/>
-    </field>
-    <button name="create_employee_from_applicant" position="attributes">
-    <attribute name="groups">dinuth_ceyfoods.hr_user_group_director</attribute>
-    <attribute name="string">Create Casual Employee</attribute>
-    </button>
-    <button name="create_employee_from_applicant" position="after">
-    <button string="Health Check Report" name="create_health_record" type="object" class="oe_highlight" attrs="{'invisible': [('health_check', '!=', True)]}"/>
-    </button>
-    <button name="create_health_record" position="attributes">
-    <attribute name="groups">dinuth_ceyfoods.hr_user_group_director</attribute>
-    </button>
+	    <field name="partner_id" position="before">
+            <field name="salutation"/>
+        </field>
+        <field name="type_id" position="attributes">
+            <attribute name="placeholder">Qualification</attribute>
+        </field>
+        <field name="type_id" position="after">
+            <field name="applicant_experience"/>
+        </field>
+        <field name="partner_mobile" position="after">
+	        <field name="gender"/>
+            <field name="marital"/>
+        </field>
+        <field name="department_id" position="after">
+            <!-- <field name="is_production"/> -->
+            <field name="health_check"/>
+            <field name="health_check_report" readonly="1"/>
+        </field>
+        <button name="create_employee_from_applicant" position="attributes">
+            <attribute name="groups">dinuth_ceyfoods.hr_user_group_director</attribute>
+            <attribute name="string">Create Casual Employee</attribute>
+        </button>
+        <button name="create_employee_from_applicant" position="after">
+            <button string="Health Check Report" name="create_health_record" type="object" class="oe_highlight" attrs="{'invisible': [('health_check', '!=', True)]}"/>
+        </button>
+        <button name="create_health_record" position="attributes">
+            <attribute name="groups">dinuth_ceyfoods.hr_user_group_director</attribute>
+        </button>
     </field>
 </record>
 

@@ -10,34 +10,36 @@ from flectra import models, fields, api, _
 #inheriting model
 class LoanAttributesModification(models.Model):
     _inherit = 'hr.loan'
-    guarantee_one = fields.Many2one('hr.employee', string="Guarantee One",required=True, domain=[('loan_count', '<',2 )])
-    guarantee_two = fields.Many2one('hr.employee', string="Guarantee Two", required=True, domain=[('loan_count', '<',2 )])
-
-    # @api.model
-    # def create(self, values):
-    #     loan_count = self.env['hr.loan'].search_count([('employee_id', '=', values['employee_id']), ('state', '=', 'approve'),
-    #                                                    ('balance_amount', '!=', 0)])
-    #     guarentee_one_count = self.env['hr.loan'].search_count([('guarantee_one', '=', values['employee_id']), ('state', '=', 'approve'),
-    #                                                    ('balance_amount', '!=', 0)])
-    #     guarentee_one_count = self.env['hr.loan'].search_count([('guarantee_two', '=', values['employee_id']), ('state', '=', 'approve'),
-    #                                                    ('balance_amount', '!=', 0)])
-    #     guarentee_count_total = guarentee_one_count+guarentee_one_count
-        
-    #     if loan_count:
-    #         raise except_orm('Error!', 'The employee has already a pending installment')
-    #     else:
-    #         values['name'] = self.env['ir.sequence'].get('hr.loan.seq') or ' '
-    #         res = super(HrLoan, self).create(values)
-    #         return res
+    guarantee_one = fields.Many2one('hr.employee', string="Guarantee One", domain=[('guarentee_count_total', '<',2 )])
+    guarantee_two = fields.Many2one('hr.employee', string="Guarantee Two",  domain=[('guarentee_count_total', '<', 2)])
     
-    # @api.multi
-    # def open_employee_guarentee(self):
-    #     return {
-    #         'name': _('Guarentee'),
-    #         'domain': ['|',('guarantee_one', '=', self.id),('guarantee_two', '=', self.id)],
-    #         'view_type': 'form',
-    #         'res_model': 'hr.loan',
-    #         'view_id': False,
-    #         'view_mode': 'tree,form',
-    #         'type': 'ir.actions.act_window',
-    #     }
+    transfered_loan = fields.Boolean('Transfered Loan', default=False)
+    
+
+    
+
+
+    def loan_transfer_to_the_guarantee(self):
+        self.ensure_one()
+        pending_installments = self.env['hr.loan.line'].search_count([('loan_id','=',self.id),('paid','=',False)])
+        
+        return {
+            'name': _('Loan Transfer'),
+            'type': 'ir.actions.act_window',            
+            'res_model': 'loan.transfer.guarantee.wizard',
+            'view_mode': 'form',
+            'view_type' : 'form',
+            
+            'context': dict(
+                self.env.context,
+                default_employee_id=self.employee_id.id,
+                default_pending_amount=self.balance_amount,
+                default_no_of_installments=pending_installments,
+                default_guarantee_one=self.guarantee_one.id,
+                default_guarantee_two=self.guarantee_two.id,
+                default_loan_id=self.id,
+                
+            ),
+            'target'    : 'new',
+        }
+  
