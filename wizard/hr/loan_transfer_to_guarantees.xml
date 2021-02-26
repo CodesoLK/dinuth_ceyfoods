@@ -2,7 +2,7 @@
 
 <flectra>
 
-<!-- tree view of the hr.applicant model -->
+<!-- tree view of the hr.loan transfer wizard -->
 <record id="hr_loan_transfer_to_guarantee_wizard" model="ir.ui.view">
     <field name="name">loan.transfer.guarantee.wizard</field>
     <field name="model">loan.transfer.guarantee.wizard</field>
@@ -19,16 +19,16 @@
         <group>
             <group>
                 <field name="guarantee_one" />
-                <field name="pracent_guarant_one" />
+                <field name="percent_guarantee_one" />
             </group>
             <group>
                 <field name="guarantee_two" />
-                <field name="pracent_guarant_two" />
+                <field name="percent_guarantee_two" />
             </group>
         </group>
         
         <footer>
-            <button string="Transfer loans" name="create_loans_for_garantees" type="object" class="oe_highlight"/>
+            <button string="Transfer loans" name="create_loans_for_guarantees" type="object" class="oe_highlight"/>
         </footer>
     </form>
     </field>

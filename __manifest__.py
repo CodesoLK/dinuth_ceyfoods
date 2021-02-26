@@ -2,7 +2,7 @@
     'name': "Dinuth Cey Foods",
     'version': '1.0.0',
     'sequence': 1,
-    'depends': ['base','hr','hr_recruitment','hr_payroll','ohrms_loan'],
+    'depends': ['base','hr','hr_recruitment','hr_payroll','ohrms_loan','hr_resignation'],
     'author': "Sathir M. Mansoor, ©2020. Fortrax Solutions All Rights Reserved.",
     'license':"OPL-1",
     'summary': 'Crafted for Dinuth Cey Foods',

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from flectra import models, fields, api, _
+from flectra import models, fields, api,_
+# from random import random
 
 # class openacademy(models.Model):
 #     _name = 'openacademy.openacademy'
@@ -14,7 +15,7 @@ class EmployeeAttributesModification(models.Model):
     applicant_experience = fields.Integer(string="Experience (Months)")
     is_production = fields.Boolean(string="Production")
     health_check = fields.Boolean(string="Health Check Eligibility")
-    health_check_report = fields.Selection([ ('pass', 'Pass'),('fail', 'Fail'),],'Health Check Results')
+    health_check_report = fields.Selection([('pass', 'Pass'),('fail', 'Fail'),],'Health Check Results')
     salutation = fields.Selection([
         ('Mr', 'Mr.'),
         ('Miss', 'Miss.'),
@@ -22,7 +23,7 @@ class EmployeeAttributesModification(models.Model):
         ('Hon', 'Hon.'),
     ], default="Mr")
     user_group_director = fields.Boolean(string="check field", compute='get_user_director')
-    guarentee_count_total = fields.Integer(string="Guarentee Count", compute='_get_guarentee_count_total')
+    guarantee_count_total = fields.Integer(string="Guaranteed")
     
     employee_category = fields.Selection([
         ('senior_executive', 'Senior Executive'),
@@ -33,13 +34,6 @@ class EmployeeAttributesModification(models.Model):
         ('category_3', 'Category 3 – Security'),
         ('category_4', 'Category 4 – Technicians'),
     ], default="category_1" , string="Employee Category")
-    @api.depends('guarentee_count_total')
-    def _get_guarentee_count_total(self):
-        guarentee_one_count = self.env['hr.loan'].search_count([('guarantee_one', '=', self.id), ('state', '=', 'approve'),
-                                                       ('balance_amount', '!=', 0)])
-        guarentee_two_count = self.env['hr.loan'].search_count([('guarantee_two', '=', self.id), ('state', '=', 'approve'),
-                                                       ('balance_amount', '!=', 0)])
-        self.guarentee_count_total = guarentee_one_count+guarentee_two_count
 
     @api.depends('user_group_director')
     def get_user_director(self):
@@ -50,7 +44,7 @@ class EmployeeAttributesModification(models.Model):
             self.user_group_director = False
         
     @api.multi
-    def open_employee_guarentee(self):
+    def open_employee_guarantee(self):
         return False
         # return {
         #     'name': _('Guarentee'),
@@ -61,3 +55,19 @@ class EmployeeAttributesModification(models.Model):
         #     'view_mode': 'tree,form',
         #     'type': 'ir.actions.act_window',
         # }
+
+        # Calculate guarantee count total
+
+        # @api.depends('random_depend')
+        # def _get_guarantee_count_total(self):
+        #     guarantee_one_count = self.env['hr.loan'].search_count([('guarantee_one', '=', self.id), ('state', '=', 'approve'),
+        #                                                    ('balance_amount', '!=', 0)])
+        #     guarantee_two_count = self.env['hr.loan'].search_count([('guarantee_two', '=', self.id), ('state', '=', 'approve'),
+        #                                                    ('balance_amount', '!=', 0)])
+        #     self.guarantee_count_total = guarantee_one_count+guarantee_two_count
+
+        # Random number generation
+        # random_depend = fields.Integer(string="Random", compute='_get_random')
+        # @api.one
+        # def _get_random(self):
+        #     self.random_depend = random.randint(0, 6585)
