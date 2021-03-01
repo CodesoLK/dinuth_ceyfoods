@@ -12,8 +12,8 @@ from flectra.exceptions import ValidationError
 class LoanAttributesModification(models.Model):
     _inherit = 'hr.loan'
     # Fields related to guarantee
-    guarantee_one = fields.Many2one('hr.employee', string="Guarantee One", domain=[('guarantee_one.id', '!=', 'guarantee_two.id'),('guarantee_count_total','<',2 )])
-    guarantee_two = fields.Many2one('hr.employee', string="Guarantee Two", domain=[('guarantee_two.id', '!=', 'guarantee_one.id'),('guarantee_count_total','<',2 )])
+    guarantee_one = fields.Many2one('hr.employee', string="Guarantee One", domain=[('id', '!=', 'guarantee_two'),('guarantee_count_total','<',2 )])
+    guarantee_two = fields.Many2one('hr.employee', string="Guarantee Two", domain=[('id', '!=', 'guarantee_one'),('guarantee_count_total','<',2 )])
     state = fields.Selection(selection_add=[('finish', 'Finished')])
     # Fields related to transfer loan
     transferred_loan = fields.Boolean('Transferred Loan', default=False)

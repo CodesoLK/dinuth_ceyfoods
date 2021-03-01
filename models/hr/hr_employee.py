@@ -16,7 +16,7 @@ class EmployeeAttributesModification(models.Model):
     is_production = fields.Boolean(string="Production")
     health_check = fields.Boolean(string="Health Check Eligibility")
     health_check_report = fields.Selection([('pass', 'Pass'),('fail', 'Fail'),],'Health Check Results')
-    guarantee_count_total = fields.Integer(string="Guaranteed")
+    guarantee_count_total = fields.Integer(string="Guaranteed", default=0)
     user_group_director = fields.Boolean(string="check field", compute='get_user_director')
     salutation = fields.Selection([
         ('Mr', 'Mr.'),
