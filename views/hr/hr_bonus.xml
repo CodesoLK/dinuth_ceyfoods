@@ -2,9 +2,9 @@
 <flectra>
     <data>
         <menuitem id="employee_bonus_menu" name="Bonus" parent="hr_payroll.menu_hr_payroll_root" sequence="2"/>
-        <menuitem id="menu_default_scheme" name="Default Scheme" parent="employee_bonus_menu" sequence="1" action="dinuth_ceyfoods.action_default_scheme_bonus"/>
-        <menuitem id="menu_fixed_scheme" name="Fixed Scheme" parent="employee_bonus_menu" sequence="2"/>
-        <menuitem id="menu_special_scheme" name="Special Scheme" parent="employee_bonus_menu" sequence="3"/>
+        <menuitem id="menu_default_scheme" name="Default Scheme" parent="dinuth_ceyfoods.employee_bonus_menu" sequence="1" action="dinuth_ceyfoods.action_default_scheme_bonus"/>
+        <menuitem id="menu_fixed_scheme" name="Fixed Scheme" parent="dinuth_ceyfoods.employee_bonus_menu" sequence="2"/>
+        <menuitem id="menu_special_scheme" name="Special Scheme" parent="dinuth_ceyfoods.employee_bonus_menu" sequence="3"/>
 
         <!-- Action for Bonus menu -->
         <record id="action_default_scheme_bonus" model="ir.actions.act_window">
