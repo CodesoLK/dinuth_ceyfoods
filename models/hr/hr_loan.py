@@ -12,8 +12,8 @@ from flectra.exceptions import ValidationError
 class LoanAttributesModification(models.Model):
     _inherit = 'hr.loan'
     # Fields related to guarantee
-    guarantee_one = fields.Many2one('hr.employee', string="Guarantee One", domain=[('id', '!=', 'guarantee_two'),('guarantee_count_total','<',2 )])
-    guarantee_two = fields.Many2one('hr.employee', string="Guarantee Two", domain=[('id', '!=', 'guarantee_one'),('guarantee_count_total','<',2 )])
+    guarantee_one = fields.Many2one('hr.employee', string="Guarantee One", domain=[('guarantee_one.id', '!=', 'guarantee_two.id'),('guarantee_count_total','<',2 )])
+    guarantee_two = fields.Many2one('hr.employee', string="Guarantee Two", domain=[('guarantee_two.id', '!=', 'guarantee_one.id'),('guarantee_count_total','<',2 )])
     state = fields.Selection(selection_add=[('finish', 'Finished')])
     # Fields related to transfer loan
     transferred_loan = fields.Boolean('Transferred Loan', default=False)
@@ -101,7 +101,7 @@ class LoanAttributesModification(models.Model):
         employee = self.guarantee_one
         emp = self.env['hr.employee'].search([('id', '=', employee.id)], limit=1)
         emp_guarantee_count = emp.guarantee_count_total
-        if emp_guarantee_count != 0 :
+        if emp_guarantee_count != 0:
             emp_guarantee_count -= 1
             emp.write({'guarantee_count_total': emp_guarantee_count})
 

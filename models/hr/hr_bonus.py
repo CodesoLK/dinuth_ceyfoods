@@ -73,3 +73,55 @@ class HRPayrollBonus(models.Model):
     @api.multi
     def action_approve(self):
         self.write({'state': 'approved'})
+
+# HR Bonus Fixed
+class HRPayrollBonusFixed(models.Model):
+    _name = 'hr.payroll.bonus.fixed'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
+    _rec_name = 'name_seq'
+    name_seq = fields.Char(string='Bonus Sequence', required=True, copy=False, readonly=True, index=True,
+                           default=lambda self: _('New'))
+    employee = fields.Many2one('hr.employee', string="Employee")
+    employment_confirmed_date = fields.Date(string='Employment Confirmed on')
+    current_date = fields.Date(string='Today', default=datetime.today())
+    total = fields.Float('Total Payable')
+    user_group_director = fields.Boolean(string="check field", compute='get_user_director')
+    state = fields.Selection([
+        ('draft', 'Draft'),
+        ('waiting_approval', 'Waiting Approval'),
+        ('approved', 'Approved'),
+        ('refused', 'Refused'),
+        ('canceled', 'Canceled'),
+    ], string="State", default='draft', track_visibility='onchange', copy=False, )
+
+    @api.depends('user_group_director')
+    def get_user_director(self):
+        res_user = self.env['res.users'].search([('id', '=', self._uid)])
+        if res_user.has_group('dinuth_ceyfoods.hr_user_group_director'):
+            self.user_group_director = True
+        else:
+            self.user_group_director = False
+
+    @api.model
+    def create(self, vals):
+        if vals.get('name_seq', _('New')) == _('New'):
+            vals['name_seq'] = self.env['ir.sequence'].next_by_code('hr.payroll.bonus.fixed.sequence') or _('New')
+
+        result = super(HRPayrollBonusFixed, self).create(vals)
+        return result
+
+    @api.multi
+    def action_refuse(self):
+        self.write({'state': 'refused'})
+
+    @api.multi
+    def action_submit(self):
+        self.write({'state': 'waiting_approval'})
+
+    @api.multi
+    def action_cancel(self):
+        self.write({'state': 'canceled'})
+
+    @api.multi
+    def action_approve(self):
+        self.write({'state': 'approved'})
