@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <flectra>
     <data>
-        <menuitem id="employee_bonus_menu" name="Bonus" parent="hr_payroll.menu_hr_payroll_root" sequence="2"/>
-        <menuitem id="menu_default_scheme" name="Default Scheme" parent="employee_bonus_menu" sequence="1" action="action_default_scheme_bonus"/>
-        <menuitem id="menu_fixed_scheme" name="Fixed Scheme" parent="employee_bonus_menu" sequence="2"/>
-        <menuitem id="menu_special_scheme" name="Special Scheme" parent="employee_bonus_menu" sequence="3"/>
-
         <!-- Action for Bonus menu -->
         <record id="action_default_scheme_bonus" model="ir.actions.act_window">
             <field name="name">Bonus</field>
@@ -79,5 +74,9 @@
             </field>
         </record>
 
+        <menuitem id="employee_bonus_menu" name="Bonus" parent="hr_payroll.menu_hr_payroll_root" sequence="2"/>
+        <menuitem id="menu_default_scheme" name="Default Scheme" parent="employee_bonus_menu" sequence="1" action="action_default_scheme_bonus"/>
+        <menuitem id="menu_fixed_scheme" name="Fixed Scheme" parent="employee_bonus_menu" sequence="2"/>
+        <menuitem id="menu_special_scheme" name="Special Scheme" parent="employee_bonus_menu" sequence="3"/>
     </data>
 </flectra>
