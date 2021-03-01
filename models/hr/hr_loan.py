@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from flectra import models, fields, api, _
+from flectra.exceptions import ValidationError
 
 # class openacademy(models.Model):
 #     _name = 'openacademy.openacademy'
@@ -13,7 +14,8 @@ class LoanAttributesModification(models.Model):
     # Fields related to guarantee
     guarantee_one = fields.Many2one('hr.employee', string="Guarantee One", domain=[('id', '!=', 'guarantee_two'),('guarantee_count_total','<',2 )])
     guarantee_two = fields.Many2one('hr.employee', string="Guarantee Two", domain=[('id', '!=', 'guarantee_one'),('guarantee_count_total','<',2 )])
-    # Fields related to guarantee
+    state = fields.Selection(selection_add=[('finish', 'Finished')])
+    # Fields related to transfer loan
     transferred_loan = fields.Boolean('Transferred Loan', default=False)
 
     @api.onchange('guarantee_one')
@@ -54,6 +56,10 @@ class LoanAttributesModification(models.Model):
     # Guarantee loan count increase on deleting the loan
     @api.model
     def create(self, vals):
+
+        if vals['employee_id'] == vals['guarantee_one'] or vals['employee_id'] == vals['guarantee_two']:
+            raise ValidationError('Employee Can not Guarantee for his/her own loan')
+
         employee = vals['guarantee_one']
         emp = self.env['hr.employee'].search([('id', '=', employee)], limit=1)
         emp_guarantee_count = emp.guarantee_count_total
@@ -67,6 +73,26 @@ class LoanAttributesModification(models.Model):
         emp.write({'guarantee_count_total': emp_guarantee_count})
 
         result = super(LoanAttributesModification, self).create(vals)
+        return result
+
+    @api.multi
+    def write(self, vals):
+
+        if self.state == 'approve':
+            if vals['state'] == 'finish':
+                employee = self.guarantee_one
+                emp = self.env['hr.employee'].search([('id', '=', employee.id)], limit=1)
+                emp_guarantee_count = emp.guarantee_count_total
+                emp_guarantee_count -= 1
+                emp.write({'guarantee_count_total': emp_guarantee_count})
+
+                employee = self.guarantee_two
+                emp = self.env['hr.employee'].search([('id', '=', employee.id)], limit=1)
+                emp_guarantee_count = emp.guarantee_count_total
+                emp_guarantee_count -= 1
+                emp.write({'guarantee_count_total': emp_guarantee_count})
+
+        result = super(LoanAttributesModification, self).write(vals)
         return result
 
     # Guarantee loan count reduce on deleting the loan

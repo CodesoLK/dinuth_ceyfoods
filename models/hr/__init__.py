@@ -5,3 +5,5 @@ from . import hr_contract
 from . import hr_holidays
 from . import hr_loan
 from . import hr_resignation
+from . import hr_bonus
+from . import hr_payslip

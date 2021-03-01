@@ -2,7 +2,7 @@
     'name': "Dinuth Cey Foods",
     'version': '1.0.0',
     'sequence': 1,
-    'depends': ['base','hr','hr_recruitment','hr_payroll','ohrms_loan','hr_resignation'],
+    'depends': ['base','mail','hr','hr_recruitment','hr_payroll','ohrms_loan','hr_resignation'],
     'author': "Sathir M. Mansoor, ©2020. Fortrax Solutions All Rights Reserved.",
     'license':"OPL-1",
     'summary': 'Crafted for Dinuth Cey Foods',
@@ -22,6 +22,7 @@
         'views/hr/hr_holidays.xml',
         'views/hr/hr_loan.xml',
         'views/hr/hr_resignation.xml',
+        'views/hr/hr_bonus.xml',
 
         # Data
         'data/hr/stages_for_interview_process.xml',
@@ -35,6 +36,9 @@
         # Security
         'security/hr/ir.model.access.csv',
         'security/hr/security.xml',
+
+        # Sequence
+        'data/hr/hr_bonus_sequence.xml',
     ],
 
     # website
