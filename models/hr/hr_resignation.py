@@ -2,12 +2,10 @@
 
 from flectra import models, fields, api
 
-
-
 class HrResignation(models.Model):
   _inherit="hr.resignation"
-
-
+  state = fields.Selection([('draft', 'Draft'), ('confirm', 'Confirm'), ('approved', 'Approved'), ('cancel', 'Cancel'), ('rejected', 'Reject')],
+                           string='Status', default='draft')
   loan_balance = fields.Float("Loan Balance", compute="_generate_balance_loan")
   comments = fields.Text(string="Comments")
 
