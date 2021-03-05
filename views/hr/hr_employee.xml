@@ -20,6 +20,9 @@
             <field name="applicant_experience"/>
             <!-- <field name="is_production"/> -->
         </field>
+        <field name="user_id" position="after">
+            <field name="epf_number"/>
+        </field>
         <field name="marital" position="after">
             <field name="health_check"/>
             <field name="user_group_director" invisible="1"/>
@@ -28,6 +31,20 @@
         <field name="gender" position="before">
             <field name="salutation"/>
         </field>
+        <xpath expr='//notebook' position="inside">
+                    <page string="Emergency Contacts">
+                        <field name="emergency_contact_ids" nolabel="1" colspan="4"
+                            context="{'default_is_company':False}">
+                            <tree>
+                                <field name='name'/>
+                                <field name='function'/>
+                                <field name='phone'/>
+                                <field name='mobile'/>
+                                <field name='email'/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
     </field>
 </record>
 

@@ -7,3 +7,4 @@ from . import hr_loan
 from . import hr_resignation
 from . import hr_bonus
 from . import hr_payslip
+from . import hr_employee_bank

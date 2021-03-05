@@ -23,6 +23,7 @@
         'views/hr/hr_loan.xml',
         'views/hr/hr_resignation.xml',
         'views/hr/hr_bonus.xml',
+        'views/hr/hr_employee_bank.xml',
 
         # Data
         'data/hr/stages_for_interview_process.xml',

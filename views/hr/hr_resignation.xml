@@ -8,7 +8,7 @@
             <field name="inherit_id" ref="hr_resignation.employee_resignation_form"/>
             <field name="arch" type="xml">
                 <field name="state" position="attributes">
-                <attribute name="statusbar_visible">draft,confirm,rejected</attribute>
+                <attribute name="statusbar_visible">draft,confirm,approved,rejected</attribute>
                 </field>
                 <xpath expr="//sheet" position="before">
                     <div class="alert alert-danger" role="alert" style="margin-bottom:1px;" attrs="{'invisible': [('loan_balance','=', 0)]}" >

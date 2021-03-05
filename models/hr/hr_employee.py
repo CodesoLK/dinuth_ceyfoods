@@ -33,6 +33,15 @@ class EmployeeAttributesModification(models.Model):
         ('category_3', 'Category 3 – Security'),
         ('category_4', 'Category 4 – Technicians'),
     ], default="category_1" , string="Employee Category")
+    epf_number = fields.Text(string="EPF Number")
+    emergency_contact_ids = fields.Many2many(
+        comodel_name='res.partner',
+        string='Emergency Contacts',
+        relation='rel_employee_emergency_contact',
+        domain=[
+            ('is_company', '=', False),
+        ]
+    )
 
     @api.depends('user_group_director')
     def get_user_director(self):
