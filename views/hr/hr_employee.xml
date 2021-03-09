@@ -48,4 +48,16 @@
     </field>
 </record>
 
+<!-- tree view of the hr.employee model -->
+<record id="hr_employee_updation_inherit" model="ir.ui.view">
+    <field name="name">hr.employee.updation.inherit</field>
+    <field name="model">hr.employee</field>
+    <field name="inherit_id" ref="hr_employee_updation.hr_employee_inherit_form_view"/>
+    <field name="arch" type="xml">
+        <group name="emergency_contact" position="attributes">
+            <attribute name="invisible">1</attribute>
+        </group>
+    </field>
+</record>
+
 </flectra>

@@ -2,21 +2,24 @@
 
 <flectra>
     <record id="resignation_hr_replace_new_fields" model="ir.ui.view">
-            <field name="name">Ihr resiganatione</field>
+            <field name="name">hr.resignation.form.inherit</field>
             <field name="model">hr.resignation</field>
             <field name="type">form</field>
             <field name="inherit_id" ref="hr_resignation.employee_resignation_form"/>
             <field name="arch" type="xml">
                 <field name="state" position="attributes">
-                <attribute name="statusbar_visible">draft,confirm,approved,rejected</attribute>
+                <attribute name="joined_date">draft,confirm,approved,rejected</attribute>
+                </field>
+                <field name="joined_date" position="attributes">
+                <attribute name="readonly">1</attribute>
                 </field>
                 <xpath expr="//sheet" position="before">
                     <div class="alert alert-danger" role="alert" style="margin-bottom:1px;" attrs="{'invisible': [('loan_balance','=', 0)]}" >
-                    You have a pending Loan to settle   />
+                    This employee has pending Loan to settle
                     </div>
                 </xpath>
                 <xpath expr="//button[@name='confirm_resignation']" position="replace">  
-                    <button string="Confirm" type="object" name="confirm_resignation"  class="oe_highlight" attrs="{'invisible': [('loan_balance', '>', 0)]}"/>
+                    <button string="Confirm" type="object" name="confirm_resignation" states="draft" class="oe_highlight" attrs="{'invisible': [('loan_balance', '>', 0)]}"/>
                 </xpath>    
                 
                 <xpath expr="//field[@name='expected_revealing_date']" position="after">  
